@@ -1,0 +1,25 @@
+.marks-container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .marks-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .marks-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .marks-table th, .marks-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .marks-table th {
+    background-color: #f2f2f2;
+  }
+  

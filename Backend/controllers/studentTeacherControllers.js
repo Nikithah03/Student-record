@@ -52,6 +52,47 @@ const getAllStudentTeachers = async (req, res) => {
   }
 };
 
+// Edit Student-Teacher Data by Student ID
+const updateStudent = async (req, res) => {
+  try {
+    const { studentId } = req.params;  // Get studentId from URL
+    const updateData = req.body;  // Get update fields from request body
+
+    // Find and update student data
+    const updatedStudent = await StudentTeacher.findOneAndUpdate(
+      { studentId }, 
+      updateData, 
+      { new: true } // Return updated document
+    );
+
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json(updatedStudent);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update student", error: err.message });
+  }
+};
+
+// Delete Student-Teacher Data by Student ID
+const deleteStudent = async (req, res) => {
+  try {
+    const { studentId } = req.params;  // Get studentId from URL
+
+    const deletedStudent = await StudentTeacher.findOneAndDelete({ studentId });
+
+    if (!deletedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json({ message: "Student deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete student", error: err.message });
+  }
+};
+
+
 // Get Student-Teacher Data by Student ID
 const getStudentById = async (req, res) => {
   try {
@@ -68,4 +109,4 @@ const getStudentById = async (req, res) => {
   }
 };
 
-module.exports = { createOrUpdateStudent, addTeacher, getAllStudentTeachers, getStudentById };
+module.exports = { createOrUpdateStudent, addTeacher, getAllStudentTeachers, getStudentById, updateStudent, deleteStudent };

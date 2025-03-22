@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
 function MarksSheetPage() {
   const [students, setStudents] = useState([]);
-
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/getAllStudentTeachers");
+        const res = await axios.get(`${BASE_URL}/getAllStudentTeachers`);
         setStudents(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -16,6 +17,7 @@ function MarksSheetPage() {
     fetchStudentData();
   }, []);
 
+  
   return (
     <div className="marks-container">
       <h2 className="marks-title">Marks Sheet</h2>

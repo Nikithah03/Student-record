@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./StudentPages.css";
+
 const StudentManagement = () => {
   const [students, setStudents] = useState([]);
   const [student, setStudent] = useState({
@@ -14,6 +15,8 @@ const StudentManagement = () => {
     className: "",
   });
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  console.log(BASE_URL)
   useEffect(() => {
     fetchStudents();
   }, []);
@@ -21,7 +24,7 @@ const StudentManagement = () => {
   // Fetch all students
   const fetchStudents = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/getAllStudentTeachers");
+      const response = await fetch(`${BASE_URL}/getAllStudentTeachers`);
       const data = await response.json();
       setStudents(data);
     } catch (error) {
@@ -43,7 +46,7 @@ const StudentManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch("http://localhost:5000/api/students", {
+      await fetch(`${BASE_URL}/Students`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(student),
@@ -139,8 +142,8 @@ const StudentManagement = () => {
                   <td>{student.name}</td>
                   <td>{student.className}</td>
                   <td>
-                    <button onClick={() => handleEdit(student)}>Edit</button>
-                    <button onClick={() => handleDelete(student._id)}>Delete</button>
+                    <button onClick={() => handleEdit(student.studentId)}>Edit</button>
+                    <button onClick={() => handleDelete(student.studentId)}>Delete</button>
                   </td>
                 </>
               )}

@@ -32,6 +32,10 @@ router.put('/teachers/:id', teacherController.updateTeacher);
 router.get('/marks/:studentId', marksController.getMarksForStudent);
 
 router.get('/getAllStudentTeachers', studentTeacherControllers.getAllStudentTeachers);
+
+router.put("/students/:studentId", studentTeacherControllers.updateStudent); // Edit student
+
+router.delete("/students/:studentId", studentTeacherControllers.deleteStudent);
  
 module.exports = router;
  

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
 function TeacherPage() {
   const [students, setStudents] = useState([]);
   const [studentId, setStudentId] = useState("");
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [marks, setMarks] = useState("");
-
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   // Fetch students and their teachers
   const fetchStudentTeachers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/getAllStudentTeachers");
+      const res = await axios.get(`${BASE_URL}/getAllStudentTeachers`);
       setStudents(res.data);
     } catch (error) {
       console.error("Error fetching student-teacher data:", error);
@@ -26,7 +27,7 @@ function TeacherPage() {
   const addTeacher = async () => {
     try {
       const payload = { studentId, name, subject, marks };
-      await axios.post("http://localhost:5000/api/teachers", payload);
+      await axios.post(`${BASE_URL}/Teachers`, payload);
       
       // Clear input fields
       setStudentId("");

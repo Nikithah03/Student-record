@@ -20,7 +20,7 @@ connectDB();  // Call the connectDB function to establish a connection to MongoD
 app.use('/api', routes);  // Use the routes under /api endpoint
  
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
